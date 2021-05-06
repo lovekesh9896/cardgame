@@ -1,0 +1,35 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#cards {
+	width: 90vw;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	display: grid;
+	grid-gap: 30px 40px;
+	grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+.card {
+	width: 100px;
+	height: 150px;
+	box-shadow: 0 0 2px 3px black;
+	display: flex;
+	flex-direction: column;
+	font-size: 30px;
+	padding: 6px 12px;
+}
+
+#match {
+	width: 90vw;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	display: grid;
+	grid-gap: 30px 40px;
+	grid-template-columns: auto auto auto auto auto auto auto;
+}

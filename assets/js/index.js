@@ -173,7 +173,7 @@ function testWhoWon() {
 }
 
 let connected = false;
-const socket = io("http://localhost:8000/");
+const socket = io("https://minus-cardgame.herokuapp.com/");
 // broadcasted messages
 socket.on("connection");
 

@@ -1,0 +1,126 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#cards {
+	width: 90vw;
+	margin: auto;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+}
+
+.card {
+	width: 100px;
+	height: 150px;
+	box-shadow: 0 0 2px 3px black;
+	display: flex;
+	flex-direction: column;
+	font-size: 30px;
+	padding: 6px 12px;
+	transition: 0.5s;
+}
+
+.cardAnim {
+	transform: translateY(-30px);
+	width: 120px;
+	border: 2px solid green;
+}
+
+#match {
+	width: 90vw;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	display: grid;
+	grid-gap: 30px 40px;
+	grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+/* screen 1 */
+#screen1 {
+	width: 100vw;
+	height: 100vh;
+	z-index: 10;
+	background-color: antiquewhite;
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#player-name {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+#screen1 h1 {
+	margin-bottom: 10px;
+}
+
+#screen1 h2 {
+	margin-bottom: 30px;
+}
+
+/* loader animation */
+
+.loader {
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* playgrounds */
+
+#playground {
+	width: 90vw;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	display: grid;
+	grid-gap: 30px 40px;
+	grid-template-columns: auto auto auto auto;
+}
+
+/* score table */
+
+#score {
+	display: flex;
+	justify-content: space-around;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 40vw;
+}
+
+td,
+th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}

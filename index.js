@@ -1,6 +1,6 @@
 const { json } = require("body-parser");
 const express = require("express");
-const port = 8000;
+const port = process.env.PORT;
 const app = express();
 
 app.use(express.static("./assets"));

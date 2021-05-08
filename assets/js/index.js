@@ -47,6 +47,7 @@ let symbols = ["♠", "♥", "♣", "♦"];
 let numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 function createCards() {
+	cards = [];
 	symbols.forEach((symbol) => {
 		numbers.forEach((value) => {
 			if (symbol == "♥" || symbol == "♦") {
@@ -75,6 +76,16 @@ function cardsSort(card1, card2) {
 
 function printCards(cards) {
 	console.log(cards);
+	let cardHTMLString = `<div class="card">
+                            <span class="symbol"></span>
+                            <span class="value"></span>
+                        </div>`;
+
+	let cardContainer = document.getElementById("cards");
+	cardContainer.innerHTML = "";
+	for (let i = 0; i < cards.length; i++) {
+		$(cardContainer).append(cardHTMLString);
+	}
 	let htmlCards = document
 		.getElementById("cards")
 		.getElementsByClassName("card");
@@ -88,6 +99,7 @@ function printCards(cards) {
 		)[0].innerText = card.getValue();
 		htmlCards[index].style.color = card.color;
 	});
+	handleCardClick();
 }
 
 function shuffle(array) {
@@ -173,7 +185,7 @@ function testWhoWon() {
 }
 
 let connected = false;
-const socket = io("https://minus-cardgame.herokuapp.com/");
+const socket = io(window.location.href);
 // broadcasted messages
 socket.on("connection");
 
@@ -209,6 +221,7 @@ function print() {
 	console.log(cards);
 }
 socket.on("starting game", (data) => {
+	console.log(data);
 	data = JSON.parse(data);
 	cards = data.cards;
 
@@ -229,9 +242,11 @@ socket.on("starting game", (data) => {
 		case 2:
 			cards = cards.slice(13, 26);
 			break;
-		default:
+		case 3:
 			cards = cards.slice(26, 39);
 			break;
+		case 4:
+			cards = cards.slice(39, 52);
 	}
 	let newCards = [];
 
@@ -257,23 +272,23 @@ socket.on("new player", (data) => {
 // starting game
 
 function startTheGame() {
-	// $("#screen1").html("");
-	// $("#screen1").append('<div class="loader"></div>');
-
-	// setTimeout(() => {
-	// 	$("#screen1").append("<h3>Starting Game...</h3>");
-	// }, 1000);
-	// setTimeout(() => {
-	// 	$("#screen1").append("<h3>Shuffling the cards...</h3>");
-	// }, 2000);
-
-	// printCards();
-
-	// setTimeout(() => {
-	$("#screen1").slideUp();
 	setPlayerNames();
-	console.log(cards);
-	// }, 3000);
+	$("#screen1").html("");
+	$("#screen1").append('<div class="loader"></div>');
+
+	setTimeout(() => {
+		$("#screen1").append("<h3>Starting Game...</h3>");
+	}, 1000);
+	setTimeout(() => {
+		$("#screen1").append("<h3>Shuffling the cards...</h3>");
+	}, 2000);
+
+	// printCards(cards);
+
+	setTimeout(() => {
+		$("#screen1").slideUp();
+		console.log(cards);
+	}, 3000);
 }
 
 let players = [];
@@ -420,7 +435,7 @@ function handleCardClick() {
 			)[0].innerText = card.getValue();
 			playgroundCards[currCards].style.color = card.color;
 
-			htmlcards[htmlcards.length - 1].remove();
+			// htmlcards[htmlcards.length - 1].remove();
 			cards = cards.filter((item) => item != card);
 			printCards(cards);
 
@@ -453,6 +468,43 @@ function handleCardClick() {
 					let tableHistoryString = letTableHistoryString();
 					console.log(tableHistoryString);
 					$($("#history tbody")[0]).append(tableHistoryString);
+
+					createCards();
+					shuffle(cards);
+					const data = JSON.stringify({ cards: cards });
+					socket.emit("starting game", data);
+					let position = 0;
+					let h3InPlayers = currPlayersName.getElementsByTagName(
+						"h3"
+					);
+
+					for (let i = 0; i < h3InPlayers.length; i++) {
+						let name = h3InPlayers[i].innerText;
+						if (name == "you") {
+							position = i + 1;
+						}
+					}
+
+					switch (position) {
+						case 1:
+							cards = cards.slice(0, 13);
+							break;
+						case 2:
+							cards = cards.slice(13, 26);
+							break;
+						case 3:
+							cards = cards.slice(26, 39);
+							break;
+						case 4:
+							cards = cards.slice(39, 52);
+					}
+					for (let i = 0; i < cards.length; i++) {
+						cards[i].owner = name;
+					}
+					printCards(cards);
+					$("#screen1").slideDown();
+					startTheGame();
+					createMessage();
 				}
 
 				setTimeout(() => {
@@ -462,6 +514,9 @@ function handleCardClick() {
 						)[0].innerText = "_";
 						playgroundCards[i].getElementsByClassName(
 							"value"
+						)[0].innerText = "_";
+						playgroundCards[i].getElementsByClassName(
+							"owner"
 						)[0].innerText = "_";
 					}
 					createMessage();
@@ -489,12 +544,15 @@ socket.on("card drawn", (card) => {
 		tempCard.owner
 	);
 	cardsToCompare.push(card);
+
 	playgroundCards[currCards].getElementsByClassName("symbol")[0].innerText =
 		card.symbol;
 	playgroundCards[currCards].getElementsByClassName(
 		"value"
 	)[0].innerText = card.getValue();
 	playgroundCards[currCards].style.color = card.color;
+	playgroundCards[currCards].getElementsByClassName("owner")[0].innerText =
+		card.owner;
 
 	currCards++;
 	console.log(playerIndex);
@@ -535,15 +593,18 @@ socket.on("card drawn", (card) => {
 				playgroundCards[i].getElementsByClassName(
 					"value"
 				)[0].innerText = "_";
+				playgroundCards[i].getElementsByClassName(
+					"owner"
+				)[0].innerText = "_";
 			}
 			createMessage();
-		}, 8000);
+		}, 4000);
 	} else {
 		createMessage();
 	}
 });
 
-handleCardClick();
+// handleCardClick();
 
 // remove after test
 

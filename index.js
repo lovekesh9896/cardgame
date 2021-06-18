@@ -1,5 +1,5 @@
 const express = require("express");
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 const app = express();
 
 app.use(express.static("./assets"));
@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
 		console.log("new player event started");
 		playersOnline.push({ name: name, id: socket.id });
 		console.log(name);
-		socket.broadcast.emit("new player", `${playersOnline.length},${name}`);
+		socket.broadcast.emit("new player", name);
 	});
 
 	socket.on("starting game", (data1) => {

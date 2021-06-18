@@ -1,0 +1,4 @@
+1. remove line 386
+2. remove line 115
+3. in html make default bet as 0 instead of _
+4. 

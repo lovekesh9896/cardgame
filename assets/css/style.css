@@ -1,34 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
+body {
+	background: radial-gradient(
+		84.58% 84.58% at 50% 44.35%,
+		#119555 0%,
+		#053b21 100%
+	);
+	background-repeat: no-repeat;
+	width: 100vw;
+	height: 100vh;
+	font-family: "Montserrat", sans-serif;
+	overflow: hidden;
+}
+
 #cards {
-	width: 90vw;
+	position: relative;
+	top: calc(100vh - 150px);
 	margin: auto;
-	position: fixed;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	display: flex;
+	left: 10%;
 }
 
 .card {
-	width: 100px;
+	width: 120px;
 	height: 150px;
-	box-shadow: 0 0 2px 3px black;
 	display: flex;
 	flex-direction: column;
 	font-size: 30px;
 	padding: 6px 12px;
-	transition: 0.5s;
+	transition: 1s;
+
+	background: #f2f2f2;
+	border: 0.804568px solid #d2d2d2;
+	box-shadow: 0px 4.02284px 27.3553px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+
+	position: absolute;
+	left: 0;
 }
 
-.cardAnim {
+#cards .card:hover {
 	transform: translateY(-30px);
 	width: 120px;
-	border: 2px solid green;
+}
+
+.img-card {
+	width: 170px;
+	position: relative;
+	font-weight: 600;
+}
+
+#actual-playground {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+}
+
+.left {
+	position: fixed;
+	left: -5%;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #006293;
+}
+
+.right {
+	position: fixed;
+	right: -5%;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #00795d;
+}
+
+.top {
+	position: fixed;
+	left: 50%;
+	top: -15%;
+	transform: translateX(-50%);
+	color: #723a5c;
+}
+
+.card-right {
+	position: fixed;
+	left: 95%;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #00795d;
+}
+
+.goTop {
+	transition: 0.5s;
+	transform: translateX(-67%);
+}
+
+#playground img {
+	width: 100%;
+}
+
+.player-name1 {
+	position: absolute;
+	top: 65%;
+	left: 70px;
+}
+
+.player-name2 {
+	position: absolute;
+	top: 65%;
+	right: 65px;
+}
+
+.player-name3 {
+	position: absolute;
+	top: 65%;
+	right: 70px;
 }
 
 #match {
@@ -46,28 +135,60 @@
 	width: 100vw;
 	height: 100vh;
 	z-index: 10;
-	background-color: antiquewhite;
+	background: radial-gradient(
+		84.58% 84.58% at 50% 44.35%,
+		#119555 0%,
+		#053b21 100%
+	);
+	background-repeat: no-repeat;
+	color: white;
 	position: fixed;
 	left: 0;
 	top: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	padding: 70px;
 }
 
+.h1 {
+	margin-bottom: 4%;
+}
+
+.h2 {
+	margin-bottom: 2%;
+}
+
+#players-online-container {
+	margin-bottom: 1%;
+}
+
+#screen1 input {
+	width: 250px;
+	height: 50px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	text-align: center;
+	font-size: larger;
+}
+
+#screen1 button {
+	background: #f08f1c;
+	width: 250px;
+	height: 50px;
+	border-radius: 25px;
+	border: none;
+	outline: none;
+	margin-top: 40px;
+	color: white;
+	font-size: larger;
+}
+/* 
 #player-name {
 	margin-top: 30px;
 	margin-bottom: 20px;
-}
-
-#screen1 h1 {
-	margin-bottom: 10px;
-}
-
-#screen1 h2 {
-	margin-bottom: 30px;
-}
+} */
 
 /* loader animation */
 
@@ -90,17 +211,13 @@
 }
 
 /* playgrounds */
-
-#playground {
-	width: 90vw;
-	margin: auto;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	display: grid;
-	grid-gap: 30px 40px;
-	grid-template-columns: auto auto auto auto;
+#playground .card {
+	/* display: none; */
 }
 
+.playground-special {
+	position: fixed;
+}
 /* score table */
 
 #score {
@@ -123,4 +240,94 @@ th {
 
 tr:nth-child(even) {
 	background-color: #dddddd;
+}
+
+/* place bet container */
+#place-bet-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: calc(100vh - 150px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#bolle {
+	display: flex;
+	flex-direction: column;
+	background: white;
+	border-radius: 10px;
+}
+
+#bolle input {
+	width: 15vw;
+	height: 30px;
+	margin: 20px;
+	border-radius: 10px;
+	border: 2px solid;
+	outline: none;
+	text-align: center;
+}
+
+#bolle button {
+	width: 15vw;
+	height: 30px;
+	margin: 20px;
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	background: cadetblue;
+	color: white;
+}
+
+.hidden {
+	display: none;
+}
+
+/* these are the animation for playground cards */
+#abcde {
+	position: fixed;
+	top: 100px;
+	left: 100px;
+	width: 140px;
+	height: 50px;
+	z-index: 10000;
+}
+.animForLeftCard {
+	transform: translateX(50vw) translateY(-50%) rotate(300deg);
+	transition: 1s;
+}
+
+.animForTopCard {
+	transform: translateY(50vh) translateX(-50%) rotate(340deg);
+	transition: 1s;
+}
+
+.animForRightCard {
+	transform: translateY(-50%) translateX(-50vw) rotate(380deg);
+	transition: 1s;
+}
+
+/*  --------- playground Classes -------------- */
+.animForTopPlayground {
+	transform: translateY(-66vh);
+	transition: 0.5s;
+}
+
+.animForBottomPlayground {
+	transform: translateY(66vh);
+	transition: 0.5s;
+}
+
+.animForLeftPlayground {
+	transform: translateX(-66vw);
+	transition: 0.5s;
+}
+
+.animForRightPlayground {
+	transform: translateX(66vw);
+	transition: 0.5s;
 }

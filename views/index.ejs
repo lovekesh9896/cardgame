@@ -6,76 +6,83 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Card Game</title>
 		<link rel="stylesheet" href="./css/style.css" />
-        <link rel="shortcut icon" href="./images/fevicon.png" type="image/x-icon">
+		<link
+			rel="shortcut icon"
+			href="./images/fevicon.png"
+			type="image/x-icon"
+		/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
 	</head>
 	<body>
-
-        <div id="playground">
-            <div class="card">
-				<span class="symbol">A</span>
-				<span class="value">A</span>
-                <span class="owner"></span>
+		<div id="playground">
+			<div class="img-card left">
+				<img src="./images/hiddenCard1.png" alt="player 1 cards" />
+				<span class="player-name player-name1">Loki</span>
 			</div>
-            <div class="card">
-				<span class="symbol">B</span>
-				<span class="value">B</span>
-                <span class="owner"></span>
+			<div class="img-card top">
+				<img src="./images/hiddenCard2.png" alt="player 1 cards" />
+				<span class="player-name player-name3">Luck</span>
 			</div>
-            <div class="card">
-				<span class="symbol">C</span>
-				<span class="value">C</span>
-                <span class="owner"></span>
+			<div class="img-card right">
+				<img src="./images/hiddenCard3.png" alt="player 1 cards" />
+				<span class="player-name player-name3">Sonu</span>
 			</div>
-            <div class="card">
-                <span class="symbol">D</span>
-                <span class="value">D</span>
-                <span class="owner"></span>
+		</div>
+
+		<button id="abcde">click me</button>
+
+		<div id="actual-playground"></div>
+
+		<div class="message" style="display: none">
+			<h2 id="message">wdvvdc</h2>
+		</div>
+
+		<div id="place-bet-container" style="display: none">
+			<div id="bolle">
+				<input
+					type="number"
+					id="bolle-input"
+					value="2"
+					placeholder="enter your bet"
+				/>
+				<button id="bolle-submit">Place bet</button>
 			</div>
-        </div>
+		</div>
 
-        <div class="message">
-            <h2 id="message">wdvvdc</h2>
-        </div>
+		<div id="score" style="display: none">
+			<table id="curr">
+				<tr>
+					<th>a</th>
+					<th>b</th>
+					<th>c</th>
+					<th>d</th>
+				</tr>
+				<tr>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+			</table>
 
-        <div id="bolle">
-            <input type="number" id="bolle-input" placeholder="enter your bet">
-            <button id="bolle-submit">Place bet</button>
-        </div>
-        <div id="score">
-            <table id="curr">
-                <tr>
-                    <th>a</th>
-                    <th>b</th>
-                    <th>c</th>
-                    <th>d</th>
-                </tr>
-                <tr>
-                    <td>_</td>
-                    <td>_</td>
-                    <td>_</td>
-                    <td>_</td>
-                </tr>
-            </table>
-
-            <table id="history">
-                <tr>
-                    <th>a</th>
-                    <th>b</th>
-                    <th>c</th>
-                    <th>d</th>
-                </tr>
-            </table>
-        </div>
+			<table id="history">
+				<tr>
+					<th>a</th>
+					<th>b</th>
+					<th>c</th>
+					<th>d</th>
+				</tr>
+			</table>
+		</div>
 
 		<div id="cards"></div>
 
-		<div id="screen1">
-			<h1>welcome to the game</h1>
-			<h2>game name: Minus</h2>
+		<div id="screen1" >
+			<h1 class="h1">Welcome to the game</h1>
+			<h2 class="h2">Game Name - Minus</h2>
 
-			<h2>
-				players online :
+			<h2 id="players-online-container">
+				Players Online - 
 				<span id="players-online"><%= players.length %></span>
 			</h2>
 
@@ -85,9 +92,9 @@
             <% } %>
             </div>
             <% if(players.length < 4) { %>
-                <h3>Enter your name to join the game</h3>
-                <input id="player-name" type="text" autofocus placeholder="enter name" />
-                <button id="start-game">start game</button>
+                <h2 style="margin-top: 4%;">Enter your name to join the game</h2>
+                <input id="player-name" type="text" autofocus placeholder="Enter Your Name" />
+                <button id="start-game">Start Game</button>
             <% }else{ %>
                 <h3>Sorry but room is already full</h3>
             <% } %>
@@ -99,6 +106,8 @@
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"
 		></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+
 		<script src="./js/index.js"></script>
 	</body>
 </html>
